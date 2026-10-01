@@ -1,0 +1,25 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Migrations are up to date with the schema
+        env: { PAYLOAD_SECRET: ci, DATABASE_URI: "file:./ci.db" }
+        run: |
+          npx payload migrate
+          npx payload migrate:create ci-check --skip-empty 2>&1 | tee out.txt
+          if ls src/migrations/*ci-check* >/dev/null 2>&1; then
+            echo "::error::Schema changed but no migration was committed. Run: npm run payload migrate:create <name>"; exit 1
+          fi
+      - run: npm run build
+        env: { PAYLOAD_SECRET: ci }

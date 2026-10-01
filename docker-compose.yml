@@ -1,0 +1,46 @@
+# Production stack for one small VPS (1 vCPU / 1–2 GB RAM is enough).
+#   docker compose up -d                          -> run the site
+#   docker compose run --rm tools npm run seed    -> load demo content (first time only)
+services:
+  app:
+    image: ${IMAGE:-oleh-oleh-cms:local}
+    build: { context: ., target: runner }
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URI: file:/app/data/site.db
+      MEDIA_DIR: /app/media
+    volumes:
+      - ./data:/app/data     # SQLite database  -> back this up
+      - ./media:/app/media   # uploaded photos  -> back this up
+    expose: ["3000"]
+    logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on: [app]
+    ports: ["80:80", "443:443"]
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+  tools:
+    build: { context: ., target: tools }
+    profiles: ["tools"]
+    user: "1001:1001"   # same user as the app, so files it creates stay writable
+    env_file: .env
+    environment:
+      DATABASE_URI: file:/app/data/site.db
+      MEDIA_DIR: /app/media
+      HOME: /tmp
+    volumes:
+      - ./data:/app/data
+      - ./media:/app/media
+
+volumes:
+  caddy_data:
+  caddy_config:
