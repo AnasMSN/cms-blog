@@ -13,7 +13,7 @@ const badgeText: Record<string, string> = {
 export function ProductCard({ product }: { product: Product }) {
   const badge = product.badges?.[0]
   return (
-    <Link href={`/produk/${product.slug}`} className="product">
+    <Link href={`/products/${product.slug}`} className="product">
       <div className="product-media">
         <Img media={product.image} size="card" sizes="(max-width: 700px) 50vw, 25vw" />
         {badge && <span className={`tag tag-${badge}`}>{badgeText[badge]}</span>}

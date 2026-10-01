@@ -56,11 +56,11 @@ export default async function ProductPage({ params }: Props) {
     <div className="wrap page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p className="crumbs">
-        <Link href="/produk">Produk</Link>
+        <Link href="/products">Produk</Link>
         {typeof product.category === 'object' && product.category && (
           <>
             <span aria-hidden> / </span>
-            <Link href={`/produk?kategori=${product.category.slug}`}>{product.category.title}</Link>
+            <Link href={`/products?category=${product.category.slug}`}>{product.category.title}</Link>
           </>
         )}
       </p>

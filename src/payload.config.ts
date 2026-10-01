@@ -2,6 +2,7 @@ import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { en } from '@payloadcms/translations/languages/en'
 import { id } from '@payloadcms/translations/languages/id'
+import fs from 'fs'
 import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
@@ -19,6 +20,12 @@ import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const databaseUri = process.env.DATABASE_URI || 'file:./data/site.db'
+// SQLite won't create missing folders, and data/ is gitignored — make sure it exists on a fresh clone.
+if (databaseUri.startsWith('file:')) {
+  fs.mkdirSync(path.dirname(databaseUri.slice('file:'.length)), { recursive: true })
+}
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
@@ -38,7 +45,7 @@ export default buildConfig({
   db: sqliteAdapter({
     // Local file by default; point at Turso (libsql://…) + auth token for serverless hosting.
     client: {
-      url: process.env.DATABASE_URI || 'file:./data/site.db',
+      url: databaseUri,
       authToken: process.env.DATABASE_AUTH_TOKEN,
     },
     // Dev: schema is pushed automatically. Production: these migrations run on boot.

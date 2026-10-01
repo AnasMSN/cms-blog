@@ -29,7 +29,7 @@ export default async function HomePage() {
           </h1>
           {home.heroText && <p className="lede">{home.heroText}</p>}
           <div className="actions">
-            <Link className="btn" href="/produk">
+            <Link className="btn" href="/products">
               {home.heroPrimaryLabel || 'Lihat produk'}
             </Link>
             {wa && (
@@ -64,7 +64,7 @@ export default async function HomePage() {
               <h2 className="h2">{home.productsTitle}</h2>
               {home.productsText && <p className="muted measure">{home.productsText}</p>}
             </div>
-            <Link href="/produk" className="text-link">
+            <Link href="/products" className="text-link">
               Semua produk
             </Link>
           </div>
@@ -80,12 +80,12 @@ export default async function HomePage() {
         <section className="section wrap">
           <div className="section-head">
             <h2 className="h2">{home.storiesTitle}</h2>
-            <Link href="/cerita" className="text-link">
+            <Link href="/stories" className="text-link">
               Semua cerita
             </Link>
           </div>
           <div className="stories">
-            <Link href={`/cerita/${lead.slug}`} className="story-lead">
+            <Link href={`/stories/${lead.slug}`} className="story-lead">
               <div className="arch arch-soft">
                 <Img media={lead.cover} size="wide" sizes="(max-width: 900px) 90vw, 55vw" />
               </div>
@@ -94,7 +94,7 @@ export default async function HomePage() {
             </Link>
             <div className="story-list">
               {rest.map((s) => (
-                <Link key={s.id} href={`/cerita/${s.slug}`} className="story-row">
+                <Link key={s.id} href={`/stories/${s.slug}`} className="story-row">
                   <Img media={s.cover} size="thumb" />
                   <div>
                     <h3>{s.title}</h3>
@@ -116,7 +116,7 @@ export default async function HomePage() {
             <div>
               <h2 className="h2">{home.aboutTitle}</h2>
               {home.aboutText && <p className="lede pre">{home.aboutText}</p>}
-              <Link href="/tentang" className="text-link on-deep">
+              <Link href="/about" className="text-link on-deep">
                 Kenali kami lebih dekat
               </Link>
             </div>

@@ -12,10 +12,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ])
   return [
     { url: base },
-    { url: `${base}/produk` },
-    { url: `${base}/cerita` },
-    { url: `${base}/tentang` },
-    ...products.docs.map((p) => ({ url: `${base}/produk/${p.slug}`, lastModified: p.updatedAt })),
-    ...stories.docs.map((s) => ({ url: `${base}/cerita/${s.slug}`, lastModified: s.updatedAt })),
+    { url: `${base}/products` },
+    { url: `${base}/stories` },
+    { url: `${base}/about` },
+    ...products.docs.map((p) => ({ url: `${base}/products/${p.slug}`, lastModified: p.updatedAt })),
+    ...stories.docs.map((s) => ({ url: `${base}/stories/${s.slug}`, lastModified: s.updatedAt })),
   ]
 }

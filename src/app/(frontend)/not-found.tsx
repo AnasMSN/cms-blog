@@ -5,7 +5,7 @@ export default function NotFound() {
     <div className="wrap page">
       <h1 className="h1">Halaman tidak ditemukan</h1>
       <p className="lede">Mungkin produknya sudah tidak dijual atau alamatnya berubah.</p>
-      <Link className="btn" href="/produk">
+      <Link className="btn" href="/products">
         Lihat semua produk
       </Link>
     </div>

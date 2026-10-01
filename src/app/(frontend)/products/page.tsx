@@ -6,13 +6,13 @@ import { payloadClient } from '@/lib/payload'
 
 export const metadata: Metadata = { title: 'Produk' }
 
-type Props = { searchParams: Promise<{ kategori?: string }> }
+type Props = { searchParams: Promise<{ category?: string }> }
 
 export default async function ProductsPage({ searchParams }: Props) {
-  const { kategori } = await searchParams
+  const { category } = await searchParams
   const payload = await payloadClient()
   const categories = await payload.find({ collection: 'categories', limit: 50, pagination: false })
-  const active = categories.docs.find((c) => c.slug === kategori)
+  const active = categories.docs.find((c) => c.slug === category)
   const where: Where | undefined = active ? { category: { equals: active.id } } : undefined
   const products = await payload.find({ collection: 'products', where, limit: 100, depth: 1 })
 
@@ -20,11 +20,11 @@ export default async function ProductsPage({ searchParams }: Props) {
     <div className="wrap page">
       <h1 className="h1">Produk</h1>
       <nav className="chips" aria-label="Filter kategori">
-        <Link href="/produk" aria-current={!active ? 'page' : undefined}>
+        <Link href="/products" aria-current={!active ? 'page' : undefined}>
           Semua
         </Link>
         {categories.docs.map((c) => (
-          <Link key={c.id} href={`/produk?kategori=${c.slug}`} aria-current={active?.id === c.id ? 'page' : undefined}>
+          <Link key={c.id} href={`/products?category=${c.slug}`} aria-current={active?.id === c.id ? 'page' : undefined}>
             {c.title}
           </Link>
         ))}

@@ -53,7 +53,7 @@ src/
   lib/payload.ts           payloadClient(), getSettings() — React cache()-wrapped
   lib/format.ts            rupiah(), tanggal(), imgUrl(), asMedia(), waLink(), safeHex()
   components/              Img (plain <img> + srcset + focal point), ProductCard, RichText
-  app/(frontend)/          public site: /, /produk, /produk/[slug], /cerita, /cerita/[slug], /tentang
+  app/(frontend)/          public site: /, /products, /products/[slug], /stories, /stories/[slug], /about
   app/(payload)/           Payload admin + API routes (generated — avoid editing)
   app/healthz/route.ts     health check (app + DB), used by Docker and deploy
   app/sitemap.ts, robots.ts
@@ -129,3 +129,13 @@ Colours are not hard-coded: `layout.tsx` injects the Settings colours as CSS var
 2. If schema changed: types regenerated + migration created and committed.
 3. `npm run build` passes.
 4. Check the affected page at desktop and ~390px mobile width.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

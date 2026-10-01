@@ -32,7 +32,7 @@ export default async function StoryPage({ params }: Props) {
     <article className="page">
       <header className="wrap article-head">
         <p className="crumbs">
-          <Link href="/cerita">Cerita</Link>
+          <Link href="/stories">Cerita</Link>
         </p>
         <h1 className="h1 measure">{story.title}</h1>
         <time className="muted">{tanggal(story.publishedAt)}</time>

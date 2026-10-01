@@ -46,7 +46,7 @@ export default async function FrontendLayout({ children }: { children: React.Rea
         <style dangerouslySetInnerHTML={{ __html: theme }} />
       </head>
       <body>
-        <a className="skip" href="#isi">
+        <a className="skip" href="#content">
           Langsung ke isi
         </a>
         <header className="site-header">
@@ -56,9 +56,9 @@ export default async function FrontendLayout({ children }: { children: React.Rea
               <span>{s.brandName}</span>
             </Link>
             <nav aria-label="Menu utama" className="nav">
-              <Link href="/produk">Produk</Link>
-              <Link href="/cerita">Cerita</Link>
-              <Link href="/tentang">Tentang</Link>
+              <Link href="/products">Produk</Link>
+              <Link href="/stories">Cerita</Link>
+              <Link href="/about">Tentang</Link>
               {wa && (
                 <a className="btn btn-small" href={wa} target="_blank" rel="noopener">
                   Pesan
@@ -68,9 +68,9 @@ export default async function FrontendLayout({ children }: { children: React.Rea
           </div>
         </header>
 
-        <main id="isi">{children}</main>
+        <main id="content">{children}</main>
 
-        <footer className="site-footer" id="kontak">
+        <footer className="site-footer" id="contact">
           <div className="wrap footer-grid">
             <div>
               <p className="footer-brand">{s.brandName}</p>

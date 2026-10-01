@@ -16,7 +16,7 @@ export default async function StoriesPage() {
       {stories.docs.length ? (
         <div className="story-grid">
           {stories.docs.map((s) => (
-            <Link key={s.id} href={`/cerita/${s.slug}`} className="story-card">
+            <Link key={s.id} href={`/stories/${s.slug}`} className="story-card">
               <div className="arch arch-soft">
                 <Img media={s.cover} size="card" sizes="(max-width: 700px) 90vw, 33vw" />
               </div>
